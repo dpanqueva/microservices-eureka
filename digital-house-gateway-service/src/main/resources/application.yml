@@ -1,0 +1,22 @@
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: actors-service
+          uri: 'lb://actors-service'
+          predicates:
+            - Path=/api/v1/actor/**
+          filters:
+            - StripPrefix= 3
+        - id: books-service
+          uri: 'lb://books-service'
+          predicates:
+            - Path=/api/v1/book/**
+          filters:
+            - StripPrefix= 3
+        - id: lend-lease-service
+          uri: 'lb://lend-lease-service'
+          predicates:
+            - Path=/api/v1/lend/**
+          filters:
+            - StripPrefix= 3
